@@ -1,5 +1,5 @@
 {
-    "name": "docker-cmd",
+    "name": "libdocker",
     "version": "0.2.2",
     "description": "A Docker NodeJS lib wrapping the Docker command line and manage it from a json file.",
     "keywords": ["docker"],
