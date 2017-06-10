@@ -1,3 +1,3 @@
-module.exports = require("./lib/docker-cmd");
+module.exports = require(__dirname + "/lib/docker-cmd")
 
-module.exports.Manager = require("./lib/docker-cmd-manager");
+module.exports.Manager = require(__dirname + "/lib/docker-cmd-manager")
