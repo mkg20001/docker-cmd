@@ -15,7 +15,7 @@ function assertDockerCalledWith() {
 
 var spawnStub
 beforeEach(function () {
-  spawnStub = sinon.stub(child_process, 'spawn', mockSpawn())
+  spawnStub = sinon.stub(child_process, 'spawn').callsFake(mockSpawn())
 })
 afterEach(function () {
   child_process.spawn.restore()
