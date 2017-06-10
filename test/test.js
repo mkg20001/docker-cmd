@@ -124,7 +124,7 @@ describe('docker-manager', function () {
   it('should build dependencies', function (done) {
 
     execDockerCM('-C ./test/resources/dockerdesc1.json build iorga_group/main'.split(' '), function (exitStatus, stdout, stderr) {
-      assert.equal(exitStatus, 0)
+      assert.equal(exitStatus, null)
       sinon.assert.calledThrice(child_process.spawn)
       done()
     })
