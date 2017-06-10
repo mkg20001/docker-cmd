@@ -5,8 +5,8 @@ var should = require('should');
 var sinon = require('sinon');
 var mockSpawn = require('mock-spawn');
 var child_process = require('child_process');
-var DockerCmdManager = require('../lib/docker-cmd-manager');
-var dockerCM = require('../lib/docker-cm');
+var DockerCmdManager = require('../lib/docker-managerd-manager');
+var dockerCM = require('../lib/docker-manager');
 var path = require('path');
 var stream = require('mock-utf8-stream');
 
@@ -107,7 +107,7 @@ describe('DockerCmdManager', function() {
     });
 });
 
-describe('docker-cm', function() {
+describe('docker-manager', function() {
 
     function execDockerCM(argv, callback) {
         var stdout = new stream.MockWritableStream();
@@ -116,7 +116,7 @@ describe('docker-cm', function() {
         dockerCM({
             stdout: stdout,
             stderr: stderr,
-            argv: ['node', path.join(__dirname, '../bin/docker-cm.js')].concat(argv)
+            argv: ['node', path.join(__dirname, '../bin/docker-manager.js')].concat(argv)
         }, function(exitStatus) {
             callback(exitStatus, stdout, stderr);
         });

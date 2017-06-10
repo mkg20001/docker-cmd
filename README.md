@@ -1,11 +1,11 @@
-# docker-cmd
+# libdocker
 
-[![Build Status](https://travis-ci.org/iorga-group/docker-cmd.svg?branch=master)](https://travis-ci.org/iorga-group/docker-cmd)
+[![Build Status](https://travis-ci.org/mkg20001/libdocker.svg?branch=master)](https://travis-ci.org/mkg20001/libdocker)
 
 > A Docker NodeJS lib wrapping the Docker command line and managing it from a json file.
 
 ## Installation
-`npm install -g docker-cmd` or as a dependency in your `package.json` if you want to use it as a library.
+`npm install -g libdocker` or as a dependency in your `package.json` if you want to use it as a library.
 
 If you have installed NodeJS on a debian based system with official packages, you have to create a symlink in order to have `node` command in the path ([like said here](http://stackoverflow.com/a/18130296/535203)):
 
@@ -14,12 +14,12 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 ```
 
 ## Usage
-`docker-cm` (for "docker command manager") will read a `dockerdesc.json` file and call `docker` with the parameters described in that file.
+`docker-manager` will read a `dockerdesc.json` file and call `docker` with the parameters described in that file.
 
 ```asciidoc
-docker-cm executes the given docker command, reading arguments from the given dockerdesc file and the given options and args.
+docker-manager executes the given docker command, reading arguments from the given dockerdesc file and the given options and args.
 
-Usage: docker-cm [options] [dockerOptions] <commandName> [descriptionOptions] <descriptionTarget> [commandOptions] [commandArgs]
+Usage: docker-manager [options] [dockerOptions] <commandName> [descriptionOptions] <descriptionTarget> [commandOptions] [commandArgs]
 
 Options:
  -h, --help               output usage information
@@ -77,7 +77,7 @@ Here is the format :
 
  * `a_docker_command` is for example `run` or `build` or another docker command
  * `a_docker_option` is for example `host` or `H` which corresponds to `--host` or `-H` of `docker` [command line options](https://docs.docker.com/reference/commandline/cli/) (before the COMMAND).
- * `a_specific_option_for_that_command` is a specific option used by `docker-cm` for the docker command it refers to
+ * `a_specific_option_for_that_command` is a specific option used by `docker-manager` for the docker command it refers to
  * `a_docker_option_for_that_command` is an option for the docker command it refers to. For example, it is `detach` or `p` for `--detach` or `-p` options for the `run` command. See the [options definition section](#options) for more information.
  * "`_`" property in the `options` section is used for the arguments passed to the docker command after its options
  * `templates` in description sections is a list of the templates to use for that description. A template named `default` will always be used by every descriptions without specifying it. Check the [templates definition section](#templates) for more information.
@@ -92,7 +92,7 @@ Here is the format :
     "buildTagFromBuildName": {boolean=true} - Whether to automatically add a "-tag" for the build command from the name of the build description
 ```
 
-By default, when building an image, `docker-cm` will look in the target `Dockerfile` the `FROM` instruction in order to check if that "parent" image is described itself in the `dockerdesc.json`. If it is the case, and `buildParent` is true, `docker-cm` will first build the parent image.
+By default, when building an image, `docker-manager` will look in the target `Dockerfile` the `FROM` instruction in order to check if that "parent" image is described itself in the `dockerdesc.json`. If it is the case, and `buildParent` is true, `docker-manager` will first build the parent image.
 
 You can use either the `path` property or the `options._` one.
 
@@ -214,12 +214,12 @@ Here is a sample `dockerdesc.json` file :
 Here is a sample code :
 
 ```javascript
-var DockerCmd = require("docker-cmd");
+var DockerCmd = require("libdocker");
 var dockerCmd = new DockerCmd();
 
 dockerCmd.build({tag: 'test', _: './test'}, null, function(dockerBuildExitCode) {
   console.log('test built');
-  
+
   if (dockerBuildExitCode === 0) {
     dockerCmd.run({name: 'test', _: 'test'}, null, function(dockerRunExitCode) {
       console.log('test run and finished.');
@@ -234,19 +234,19 @@ The second parameter is used for `dockerOptions` (with a `host` property for exa
 
 It has no complex logic and will just call the `docker` command with the given parameters.
 
-Find the complete doc directly [in `DockerCmd` sources](lib/docker-cmd.js).
+Find the complete doc directly [in `DockerCmd` sources](lib/libdocker.js).
 
 
 ## Using `DockerCmdManager`
 Here is a sample code :
 
 ```javascript
-var DockerCmdManager = require("docker-cmd").Manager;
+var DockerCmdManager = require("libdocker").Manager;
 var dockerCmdManager = new DockerCmdManager('./test/dockerdesc.json');
 
 dockerCmdManager.build('test', function(dockerBuildExitCode) {
   console.log('test built');
-  
+
   if (dockerBuildExitCode === 0) {
     dockerCmdManager.run('test', function(dockerRunExitCode) {
       console.log('test run and finished.');
@@ -259,6 +259,6 @@ That object will read a `dockerdesc.json` file and call a `DockerCmd` with the p
 
 `DockerCmdManager` handles dependencies between builds for `build` command.
 
-`docker-cm` command line uses that object.
+`docker-manager` command line uses that object.
 
-Find the complete doc directly [in `DockerCmdManager` sources](lib/docker-cmd-manager.js).
+Find the complete doc directly [in `DockerCmdManager` sources](lib/libdocker-manager.js).
