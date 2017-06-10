@@ -3,12 +3,12 @@
     "version": "0.2.2",
     "description": "A Docker NodeJS lib wrapping the Docker command line and manage it from a json file.",
     "keywords": ["docker"],
-    "homepage": "http://github.com/iorga-group/docker-cmd",
+    "homepage": "http://github.com/mkg20001/libdocker",
     "repository": {
         "type": "git",
-        "url": "https://github.com/iorga-group/docker-cmd.git"
+        "url": "https://github.com/mkg20001/libdocker.git"
     },
-    "bugs": "https://github.com/iorga-group/docker-cmd/issues",
+    "bugs": "https://github.com/mkg20001/libdocker/issues",
     "license": "Apache-2.0",
     "author": "Anthony Ogier <npm@iorga.com>",
     "main": "index.js",
