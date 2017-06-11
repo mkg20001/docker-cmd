@@ -1,6 +1,6 @@
 {
   "name": "libdocker",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A Docker NodeJS lib wrapping the Docker command line and manage it from a json file.",
   "keywords": [
     "docker"
@@ -22,14 +22,10 @@
     "mstring": "^0.1.2"
   },
   "devDependencies": {
-    "mocha": "~3.4.2",
-    "should": "~11.2.1",
-    "sinon": "~2.3.4",
-    "mock-spawn": "~0.2.6",
-    "blanket": "~1.2.3",
-    "travis-cov": "~0.2.5",
-    "mocha-multi": "~0.11.0",
-    "mock-utf8-stream": "~0.1.1"
+    "mocha": "^3.4.2",
+    "mock-spawn": "^0.2.6",
+    "mock-utf8-stream": "^0.1.1",
+    "sinon": "^2.3.4"
   },
   "config": {
     "blanket": {
